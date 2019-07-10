@@ -1,0 +1,23 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Test suite">
+    <test name="Login Test">
+        <classes>
+            <class name="com.ecoos.selenium.tests.LoginTest">
+                <methods>
+                    <include name="InvalidEmail">
+                        <parameter name="UserName" value="aya@gmail.com" />
+                        <parameter name="Password" value="ecoos6" />
+                    </include>
+                    <include name="InvalidPassword">
+                        <parameter name="UserName" value="admin@ecoos.co" />
+                        <parameter name="Password" value="123" />
+                    </include>
+                    <include name="ValidLogin">
+                        <parameter name="UserName" value="admin@ecoos.co" />
+                        <parameter name="Password" value="ecoos6"/>
+                    </include>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
