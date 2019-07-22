@@ -16,5 +16,6 @@ public class Locators {
     public static By collapseExpandAssetview = By.xpath("//i[@ng-click='assetToolsCollapse = !assetToolsCollapse']");
     public static By SelectAllAssets = By.xpath("//label[@for='chkAll']");
     public static By ApplyButton = By.id("BtnSaveBottom");
+    public static  By CheckBoxes = By.xpath("//input[@type='checkbox']");
 
 }
