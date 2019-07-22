@@ -1,6 +1,6 @@
 package com.ecoos.selenium.tests;
 
-
+import com.ecoos.selenium.locators.Locators;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
@@ -10,7 +10,6 @@ import org.testng.annotations.BeforeTest;
 import com.ecoos.selenium.commons.PropertyManager;
 import com.ecoos.selenium.pages.LoginPage;
 import com.ecoos.selenium.pages.BasePage;
-import com.ecoos.selenium.locators.Locators;
 import com.ecoos.selenium.commons.Constants;
 
 public class BaseTest extends BasePage{
@@ -18,9 +17,7 @@ public class BaseTest extends BasePage{
 
     @BeforeSuite
     public void beforeSuite() {
-
         try {
-
             String url = PropertyManager.getInstance().getURL();
             String chromeDriverPath = PropertyManager.getInstance().getChromedriverPath();
             String geckoDriverPath = PropertyManager.getInstance().getgeckodriverPath();
@@ -43,19 +40,19 @@ public class BaseTest extends BasePage{
 
         }
     }
-
-    @BeforeTest
-    public void ValidLogin() throws InterruptedException {
-
-        UserName = PropertyManager.getInstance().getUserName();
-        Password = PropertyManager.getInstance().getPassword();
-        LoginPage login = new LoginPage(driver);
-        login.clearLoginFields();
-        login.loginToSite("admin@ecoos.co", "ecoos6");
-        BasePage.Wait(Locators.collect, 6);
-        Assert.assertEquals(login.getCurrentURL(),Constants.Collect);
-    }
-
+   /*@BeforeTest
+        public void ValidLogin() {
+            try{
+                UserName = PropertyManager.getInstance().getUserName();
+                Password = PropertyManager.getInstance().getPassword();
+                LoginPage login = new LoginPage(driver);
+                login.loginToSite(UserName,Password);
+                BasePage.WaitForElementToBeClickable(Locators.Logout,20);
+                Assert.assertEquals(login.getCurrentURL(),Constants.Collect);
+            }catch (Exception e){
+                System.out.println("Ex: @BeforeTest :  " + e.getMessage());
+            }
+    }*/
     @AfterSuite
     public void afterSuite() {
         System.out.println("Test is finished");

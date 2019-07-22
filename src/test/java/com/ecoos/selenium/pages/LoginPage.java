@@ -18,26 +18,25 @@ public class LoginPage extends BasePage {
     public void loginToSite(String UserName, String Password) {
 
         try {
-            String URL = getCurrentURL();
-            if (URL == Constants.Collect) {
-                driver.findElement(Locators.Logout).click();
-                sendText(Locators.UserName, UserName);
-                sendText(Locators.Password, Password);
-                clickElement(Locators.LoginButton);
-            }else {
                 sendText(Locators.UserName, UserName);
                 sendText(Locators.Password, Password);
                 clickElement(Locators.LoginButton);
             }
-        }catch(Exception e){
+        catch(Exception e){
                 System.out.println("Ex: Login :  " + e.getMessage());
             }
-        }
+    }
     public void LogoutFromSuite() {
         try {
+            WaitForElement(6000);
             clickElement(Locators.Logout);
         } catch (Exception e) {
             System.out.println("Ex: Logout :  " + e.getMessage());
         }
+    }
+    public void IsloggedIn(){
+        String URL = getCurrentURL();
+        if(URL == Constants.Collect)
+            LogoutFromSuite();
     }
 }
