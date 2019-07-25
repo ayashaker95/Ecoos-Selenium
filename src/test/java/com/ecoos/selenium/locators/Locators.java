@@ -17,5 +17,7 @@ public class Locators {
     public static By SelectAllAssets = By.xpath("//label[@for='chkAll']");
     public static By ApplyButton = By.id("BtnSaveBottom");
     public static  By CheckBoxes = By.xpath("//input[@type='checkbox']");
+    public static By ClassNameForChildAsset = By.xpath("//div[@ng-repeat=\"childAsset in asset.parent.firstLevelChildren\"]//parent::div/div/span/input");
+    public static By ClassNameFor2ChildAsset = By.xpath("//div[@ng-repeat=\"secondChild in childAsset.children\"]/parent::div/div/span/input");
 
 }

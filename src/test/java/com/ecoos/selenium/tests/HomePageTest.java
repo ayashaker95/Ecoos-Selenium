@@ -1,14 +1,12 @@
 package com.ecoos.selenium.tests;
 
-import com.ecoos.selenium.commons.Constants;
-import com.ecoos.selenium.locators.Locators;
 import com.ecoos.selenium.pages.BasePage;
 import com.ecoos.selenium.pages.HomePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
-import org.testng.annotations.Parameters;
+
 import org.testng.annotations.Test;
 
 
@@ -16,50 +14,57 @@ public class HomePageTest extends BaseTest {
 
     HomePage homePage = new HomePage(driver);
 
-    @Test(dataProvider = "Categories")
-    public void OpenCategoryTest(String Categories) throws Exception {
-        homePage.OpenCategory(Categories);
+    @Test(dataProvider = "category")
+    public void OpenCategoryTest(String category) throws Exception {
+        homePage.OpenCategory(category);
         BasePage.WaitForElement(6000);
-        WebElement element = driver.findElement(By.xpath("//span[@class='name "+Categories+"']"));
+        WebElement element = driver.findElement(By.xpath("//span[@class='name "+category+"']"));
        String categoryName= element.getAttribute("class");
-       Assert.assertEquals(categoryName, "name "+Categories+"");
+       Assert.assertEquals(categoryName, "name "+category+"");
     }
-
     @Test
     public void TestAssetView() throws Exception {
         homePage.OpenAssetView();
         BasePage.WaitForElement(8000);
-        Assert.assertTrue(homePage.getCurrentURL().contains("new-select-asset"), Constants.SelectAssetsUrl);
+        Assert.assertTrue(homePage.getCurrentURL().contains("new-select-asset"));
     }
    @Test(dataProvider = "Assets")
-    public void SelectAssetsFromMen(String Assets) throws Exception {
+    public void SelectAssetsFromMenuTest(String Assets) throws Exception {
+
+        WebElement element = driver.findElement(By.id("chk"+Assets+""));
         BasePage.WaitForElement(5000);
-        homePage.SelectAssetsFromMenu(Assets);
+        homePage.SelectAssetCheckBox(Assets);
+        homePage.IsSelected(element ,Assets);
         BasePage.WaitForElement(5000);
-    }
-    @Test
-    public void SelectAllAssetsTest(){
-        homePage.SelectAllAssets();
 
     }
     @Test
     public void ClickApplyButtonTest()throws Exception{
         homePage.ClickApplyButton();
-
     }
+
+    /*@Test
+    public void SelectAllAssetsTest(){
+        homePage.SelectAllAssets();
+
+    }*/
     @DataProvider(name ="Assets")
-    public Object[][] getAssetsFromDataprovider(){
+    public Object[][] getAssetsFromDataProvider(){
         return  new Object[][]{
-                {"Office"},
-                {"Whole site"},
-                { "Main Stack - 54" },
                 { "Western Spent Smoke Stack" }};
     }
-    @DataProvider(name = "Categories")
+    @DataProvider(name = "category")
     public Object [][] getCategoriesFromDataProvider(){
         return new Object[][]{
                 {"energy"}
         };
     }
+    @DataProvider(name = "ExpectedAssets")
+    public Object [][] getExpectedAssetsFromDataProvider(){
+        return new Object[][]{
+                {"Office"},
+                {"Whole site"},
+                {"Western Spent Smoke Stack"}
+        };
+    }
 }
-

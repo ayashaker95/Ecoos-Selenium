@@ -7,7 +7,6 @@ import org.openqa.selenium.WebDriver;
 import com.ecoos.selenium.commons.Constants;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
-
 import java.util.List;
 
 
@@ -40,38 +39,45 @@ public class HomePage extends BasePage {
             System.out.println("Ex: OpenAssetView :  " + e.getMessage());
         }
     }
-    public void SelectAssetsFromMenu(String Assets) {
-        try {
-            System.out.println("Begin");
-                By xpath = By.xpath("//label[@for='chk" + Assets + "']");
-                WebElement element = driver.findElement(xpath);
-                element.click();
-                WebElement input = driver.findElement(By.xpath("//input[@id='chk"+Assets+"']"));
-                String AssetLevel = input.getAttribute("ng-model");
-                String className = input.getAttribute("class");
-                System.out.println(AssetLevel);
-                switch(AssetLevel.charAt(0)){
-                    case 's':
-                        Assert.assertTrue(className.contains("ng-not-empty"));
-                        System.out.println("SecondChild");
-                        break;
-                    case 'c':
-                        Assert.assertTrue(className.contains("ng-not-empty"));
-                        System.out.println("child");
-                        break;
-                    case 'a':
-                        Assert.assertTrue(className.contains("ng-not-empty"));
-                        System.out.println("parent");
-                        break;
-                }
-                WaitForElement(500);
-                System.out.println("clicked");
-
-
-        }catch(Exception e){
-            System.out.println("Ex:Selectassets" +e.getMessage());
-        }
+  public void SelectAssetCheckBox(String asset){
+      By xpath = By.xpath("//label[@for='chk" + asset + "']");
+      WebElement element = driver.findElement(xpath);
+      element.click();
+  }
+  public String getCheckBoxLevel(WebElement element, String asset){
+      element = driver.findElement(By.xpath("//input[@id='chk"+asset+"']"));
+      return element.getAttribute("ng-model");
+  }
+  public String getCheckBoxClassName(WebElement element, String asset){
+      element = driver.findElement(By.xpath("//input[@id='chk"+asset+"']"));
+       return element.getAttribute("class");
+  }
+  public String getChildCheckBoxClassName(String asset){
+     WebElement element = driver.findElement(Locators.ClassNameForChildAsset);
+     return element.getAttribute("class");
+  }
+    public String getSecondCheckBoxClassName(String asset){
+        WebElement element = driver.findElement(Locators.ClassNameFor2ChildAsset);
+        return element.getAttribute("class");
     }
+  public boolean IsSelected (WebElement element, String assets){
+      boolean isSelected;
+
+          switch (getCheckBoxLevel(element, assets).charAt(0)) {
+              case 'a':
+                  if (getCheckBoxClassName(element, assets).contains("not-ng-empty"))
+                  return isSelected = true;
+              case 'c':
+                  if (getCheckBoxClassName(element, assets).contains("not-ng-empty") && getChildCheckBoxClassName(assets).contains("not-ng-empty")) {
+                      return isSelected = true;
+                  }
+              case 's':
+                  if (getCheckBoxClassName(element, assets).contains("not-ng-empty") && getChildCheckBoxClassName(assets).contains("not-ng-empty") && getSecondCheckBoxClassName(assets).contains("ng-not-empty"));
+                      return isSelected = true;
+      }
+
+      return isSelected=false;
+  }
     public int SelectAllAssets(){
         clickElement(Locators.SelectAllAssets);
         WebElement SelectAll = driver.findElement(By.id("chkAll"));
@@ -86,10 +92,31 @@ public class HomePage extends BasePage {
         }
         return elements.size();
     }
-    public void ClickApplyButton()throws Exception{
+    public void ClickApplyButton() throws Exception {
+        List<WebElement> AllSelectedCheckBoxes = driver.findElements(By.xpath("//input[contains(@class, 'ng-not-empty')]"));
         clickElement(Locators.ApplyButton);
         WaitForElement(6000);
+        if(IsParentCollapsePresent()){
+            List<WebElement> ParentCollapse = driver.findElements(By.xpath("//img[@ng-init=\"isParentExpanded = vm.assetExpanded[asset.parent.AssetId];\"]"));
+            for (WebElement collapse :ParentCollapse){
+               if(collapse.getAttribute("ng-src").contains("collapse"))
+                   collapse.click();
+            }
+        }
+        }
+    public boolean IsParentCollapsePresent(){
+        Boolean isPresent = driver.findElements(By.xpath("//img[@ng-init=\"isParentExpanded = vm.assetExpanded[asset.parent.AssetId];\"]")).size() > 0 ;
+        return isPresent;
+    }
+    public boolean IsChildCollapsePresent(){
+        Boolean isPresent = driver.findElements(By.xpath("//img[@ng-init=\"isExpanded = vm.assetExpanded[fLevelAsset.AssetId];\"]")).size() > 0 ;
+        return isPresent;
+    }
+    public boolean IsCollapsed(){
+      WebElement element = driver.findElement(By.xpath("//img[@alt='Expand Icon']"));
+      if (element.getAttribute("ng-src").contains("collapse")){
+          return true;
+      }else
+          return false;
     }
 }
-
-
