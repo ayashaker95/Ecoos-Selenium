@@ -1,10 +1,14 @@
 package com.ecoos.selenium.pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import java.util.concurrent.TimeUnit;
+import java.util.List;
+
+
 
 
 public class BasePage {
@@ -56,13 +60,31 @@ public class BasePage {
         return URL;
     }
 
-    public String getElementText(By path) {
+    public static String getElementText(By path) {
 
         return driver.findElement(path).getText();
     }
-    public By genarateXpath(String Xpath,String inputData) {
+    public By generateXpath(String Xpath,String inputData) {
 
         return By.xpath(Xpath+ inputData + "')]");
+    }
+    public void ScrollDownUntilElementView(By path) {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        WebElement Element = driver.findElement(path);
+        js.executeScript("arguments[0].scrollIntoView();", Element);
+
+    }
+    public static void ScrollDownByPixel(){
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        System.out.println("Scroll");
+        js.executeScript("window.scrollBy(0,50000)", "");
+
+    }
+    public List<WebElement> getListOfElement( By locatorItem) throws InterruptedException {
+
+        List<WebElement> options = driver.findElements(locatorItem);
+
+        return options ;
     }
 
 }

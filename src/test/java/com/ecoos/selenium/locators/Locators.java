@@ -42,5 +42,6 @@ public class Locators {
     public static By SelectedSite = By.xpath("//a[@href=\"/dashboard/sites\"]/p[1]");
     public static By QuestionsTab = By.xpath("//a[contains(text(),'Questions')]");
     public static By SaveButton = By.xpath("//button[@ng-click=\"vm.save()\"]");
+    public static By IdCell = By.xpath("//div[@role=\"button\"]/span[contains(text(),'Id')]");
 
 }
