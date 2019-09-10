@@ -22,7 +22,6 @@ public class CreateAccount extends BasePage {
     }
     public void OpenAdminSetting(){
         try{
-            Thread.sleep(600);
             clickElement(Locators.AdminSetting);
             WaitForElementToBeVisible(Locators.AccountsTab,10);
         }catch (Exception e){
@@ -31,7 +30,6 @@ public class CreateAccount extends BasePage {
     }
     public void OpenAccountTab(){
         try{
-            Thread.sleep(600);
             clickElement(Locators.AccountsTab);
             WaitForElementToBeClickable(Locators.AddnewAccountBtn,10);
         }catch (Exception e){
@@ -40,7 +38,6 @@ public class CreateAccount extends BasePage {
     }
     public void clickAddNewAccount(){
         try{
-            Thread.sleep(600);
             clickElement(Locators.AddnewAccountBtn);
             WaitForElementToBeVisible(Locators.AddNewAccountHerder,10);
         }catch (Exception e){
@@ -54,9 +51,7 @@ public class CreateAccount extends BasePage {
             WebElement CompanyNameEle = driver.findElement(Locators.CompanyNameTextFiled);
             Select SectorList = new Select(driver.findElement(Locators.SectorList));
             AccountNameEle.sendKeys(AccountName);
-            Thread.sleep(600);
             CompanyNameEle.sendKeys(CompanyName);
-            Thread.sleep(600);
             SectorList.selectByVisibleText(Sector);
             ScrollDownUntilElementView(Locators.SubmitButton);
             WebElement Save = driver.findElement(Locators.SubmitButton);
@@ -80,7 +75,6 @@ public class CreateAccount extends BasePage {
             ZipEle.sendKeys(Zip);
             WebElement Save = driver.findElement(Locators.SubmitButton);
             Save.click();
-            Thread.sleep(600);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -88,7 +82,6 @@ public class CreateAccount extends BasePage {
     public void CreateAccount(String Address ,String Zip ){
         try {
             WebElement AddressEle = driver.findElement(Locators.AddressTextField);
-            Thread.sleep(600);
             AddressEle.sendKeys(Address);
             ScrollDownUntilElementView(Locators.SubmitButton);
             WebElement ZipEle = driver.findElement(Locators.ZipTextField);
@@ -104,12 +97,10 @@ public class CreateAccount extends BasePage {
         CreateAccount(AccountName, CompanyName,Sector , Address,Zip);
         WebElement element = driver.findElement(Locators.SitesList);
         element.click();
-        Thread.sleep(6000);
         By path = By.xpath("//li/div[contains(string(),\""+AccountName+"\")]");
         ScrollDownUntilElementView(path);
         WebElement account = driver.findElement(By.xpath("//li/div[contains(string(),\""+AccountName+"\")]"));
         action.doubleClick(account).perform();
-        Thread.sleep(600);
         }
 }
 

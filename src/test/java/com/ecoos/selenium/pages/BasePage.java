@@ -19,13 +19,14 @@ public class BasePage {
         this.driver = driver;
     }
 
-    public void clickElement(By Path) {
+    public static void clickElement(By Path)throws Exception {
         WebDriverWait wait = new WebDriverWait(driver, 20);
         wait.until(ExpectedConditions.visibilityOf(driver.findElement(Path)));
         driver.findElement(Path).click();
+        Thread.sleep(6000);
     }
 
-    public void sendText(By Path, String dataInput) {
+    public static void sendText(By Path, String dataInput) {
         driver.findElement(Path).sendKeys(dataInput);
     }
 
@@ -86,6 +87,22 @@ public class BasePage {
 
         return options ;
     }
+    public boolean isDisplayed(By path){
+        if ( driver.findElement(path).isDisplayed()){
+            return true;
+        }else
+            return false;
+    }
+    public boolean ElementisExist(By path){
+        if( driver.findElements(path).size()> 0) {
+            return true;
+        }else
+            return false;
+    }
+    public String GetText(By path){
+         return driver.findElement(path).getText();
+    }
+
 
 }
 
