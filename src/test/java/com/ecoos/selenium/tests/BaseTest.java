@@ -40,19 +40,21 @@ public class BaseTest extends BasePage{
 
         }
     }
-   /*@BeforeTest
+    @BeforeTest
         public void ValidLogin() {
             try{
                 UserName = PropertyManager.getInstance().getUserName();
                 Password = PropertyManager.getInstance().getPassword();
                 LoginPage login = new LoginPage(driver);
                 login.loginToSite(UserName,Password);
+                Thread.sleep(600);
                 BasePage.WaitForElementToBeClickable(Locators.Logout,20);
+                Thread.sleep(4000);
                 Assert.assertEquals(login.getCurrentURL(),Constants.Collect);
             }catch (Exception e){
                 System.out.println("Ex: @BeforeTest :  " + e.getMessage());
             }
-    }*/
+    }
     @AfterSuite
     public void afterSuite() {
         System.out.println("Test is finished");
