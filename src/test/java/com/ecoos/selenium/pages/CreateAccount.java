@@ -54,8 +54,7 @@ public class CreateAccount extends BasePage {
             CompanyNameEle.sendKeys(CompanyName);
             SectorList.selectByVisibleText(Sector);
             ScrollDownUntilElementView(Locators.SubmitButton);
-            WebElement Save = driver.findElement(Locators.SubmitButton);
-            Save.click();
+            clickElement(Locators.SubmitButton);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -73,8 +72,7 @@ public class CreateAccount extends BasePage {
             ScrollDownUntilElementView(Locators.SubmitButton);
             WebElement ZipEle = driver.findElement(Locators.ZipTextField);
             ZipEle.sendKeys(Zip);
-            WebElement Save = driver.findElement(Locators.SubmitButton);
-            Save.click();
+            clickElement(Locators.SubmitButton);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -86,8 +84,7 @@ public class CreateAccount extends BasePage {
             ScrollDownUntilElementView(Locators.SubmitButton);
             WebElement ZipEle = driver.findElement(Locators.ZipTextField);
             ZipEle.sendKeys(Zip);
-            WebElement Save = driver.findElement(Locators.SubmitButton);
-            Save.click();
+            clickElement(Locators.SubmitButton);
         } catch (Exception e) {
             e.printStackTrace();
         }

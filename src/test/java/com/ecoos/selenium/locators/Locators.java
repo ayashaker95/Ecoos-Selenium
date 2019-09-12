@@ -42,6 +42,20 @@ public class Locators {
     public static By SelectedSite = By.xpath("//a[@href=\"/dashboard/sites\"]/p[1]");
     public static By QuestionsTab = By.xpath("//a[contains(text(),'Questions')]");
     public static By SaveButton = By.xpath("//button[@ng-click=\"vm.save()\"]");
-    public static By IdCell = By.xpath("//div[@role=\"button\"]/span[contains(text(),'Id')]");
+    public static By IdCell = By.xpath("//div[@role=\"button\"]/span[./text()='Id']");
+    //public static By IdCell = By.xpath("//div[@role=\"button\"]/span[contains(text(),'Id')]");
+    public static By DataPointTab = By.xpath("//a[contains(string(),'Data Points')]");
+    public static By SearchForDP = By.xpath("//input[@type=\"search\"]");
+    public static By DataPointDropDown = By.xpath("//ul[@class=\"ui-select-choices ui-select-choices-content ui-select-dropdown dropdown-menu ng-scope\"]");
+    public static By AssetsTab = By.xpath("//a[contains(text(),\"Assets\")]");
+    public static By AddNewAsset = By.xpath("//a[@title=\"Add new asset to this site\"]");
+    public static By AssetName = By.id("assetName");
+    public static By AssetType = By.xpath("//select[@ng-model=\"vm.asset.typeId\"]");
+    public static By SetupTab = By.xpath("//a[contains(text(),'Setup')]");
+    public static By ApplyProtocolBtn = By.id("BtnSaveBottom");
+    public static By protocolId = By.id("protocol");
+    public static By QuestionName = By.id("text");
+    public static By protocolFullName = By.name("fullName");
+    public static By ProtocolDropDown = By.xpath("//select[@ng-model=\"hdr.selectedProtocolId\"]");
 
 }
