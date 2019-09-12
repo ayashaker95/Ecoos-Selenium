@@ -37,8 +37,6 @@ public class CreateAccountTest extends BaseTest{
    @Parameters({"AccountName","CompanyName","Sector"})
     public void CreateAccountWithRequiredFieldsTest(String AccountName, String CompanyName,String Sector)throws Exception{
         createAccount.CreateAccount(AccountName,CompanyName,Sector);
-        Thread.sleep(6000);
-       Assert.assertEquals(getCurrentURL(), Constants.AccountsTab);
         By accountName = By.xpath("//tr/td[contains(text(),'"+ AccountName +"')]");
         ScrollDownUntilElementView(accountName);
         Assert.assertTrue(ElementisExist(accountName));
@@ -48,7 +46,6 @@ public class CreateAccountTest extends BaseTest{
    @Parameters({"AccountName","CompanyName","Sector","Address","Zip"})
     public void CreateAccountWithRequiredAndOptionalFieldsTest(String AccountName, String CompanyName,String Sector,String Address,String Zip)throws Exception{
         createAccount.CreateAccount(AccountName,CompanyName,Sector,Address,Zip);
-        Assert.assertEquals(getCurrentURL(),Constants.AccountsTab);
        By accountName = By.xpath("//tr/td[contains(text(),'"+ AccountName +"')]");
        ScrollDownUntilElementView(accountName);
        Assert.assertTrue(ElementisExist(accountName));
